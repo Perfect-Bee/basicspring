@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "users")
+@Table(name = "members")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
