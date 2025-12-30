@@ -78,4 +78,16 @@ public class MemberService {
                 member.getModifiedAt()
         );
     }
+    // 이건 read가 아니니 readOnly = true 없음
+    @Transactional
+    public void delete(Long memberId) {
+        // 바로 찾는 게 아니라, 존재 하는지만 체크
+        boolean existence = memberRepository.existsById(memberId);
+        // 존재하지 않으면
+        if (!existence) {
+            throw new IllegalStateException("없는 맴버이므로 찾지 마세요.");
+        }
+        // 존재하면 삭제
+        memberRepository.deleteById(memberId);
+    }
 }

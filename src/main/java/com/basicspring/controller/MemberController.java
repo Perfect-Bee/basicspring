@@ -51,4 +51,10 @@ public class MemberController {
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(memberService.update(memberId, request));
     }
+    
+    // 삭제
+    @DeleteMapping("/members/{memberId}")
+    public void delete(@PathVariable Long memberId) {
+        memberService.delete(memberId);
+    }
 }
