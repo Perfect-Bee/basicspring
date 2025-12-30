@@ -4,6 +4,7 @@ import com.basicspring.dto.MemberCreateResponse;
 import com.basicspring.dto.MemberCreateRequest;
 import com.basicspring.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,10 @@ public class MemberController {
     public ResponseEntity<MemberCreateResponse> create(
             @RequestBody MemberCreateRequest request
     ){
-
+        // body 괄호 안에 있는 건 아래 코드를 압축한 것
+        // body(response) =
+        // MemberCreateResponse response = memerService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberService.save(request));
     }
 
 }
