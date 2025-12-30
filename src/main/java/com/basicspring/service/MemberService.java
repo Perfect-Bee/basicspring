@@ -1,8 +1,6 @@
 package com.basicspring.service;
 
-import com.basicspring.dto.MemberCreateRequest;
-import com.basicspring.dto.MemberCreateResponse;
-import com.basicspring.dto.MemberGetResponse;
+import com.basicspring.dto.*;
 import com.basicspring.repository.MemberRepository;
 import com.basicspring.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +57,21 @@ public class MemberService {
                 () -> new IllegalStateException("없는 맴버입니다.")
         );
         return new MemberGetResponse(
+                member.getId(),
+                member.getName(),
+                member.getCreatedAt(),
+                member.getModifiedAt()
+        );
+    }
+    
+    // 이건 read가 아니닌까 readOnly = true 없음
+    @Transactional 
+    public MemberUpdateResponse update(Long memberId, MemberUpdateRequest request) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new IllegalStateException("없는 맴버입니다.")
+        );
+        member.update(request.getName());
+        return  new MemberUpdateResponse(
                 member.getId(),
                 member.getName(),
                 member.getCreatedAt(),

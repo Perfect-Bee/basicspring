@@ -1,8 +1,6 @@
 package com.basicspring.controller;
 
-import com.basicspring.dto.MemberCreateResponse;
-import com.basicspring.dto.MemberCreateRequest;
-import com.basicspring.dto.MemberGetResponse;
+import com.basicspring.dto.*;
 import com.basicspring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,5 +41,14 @@ public class MemberController {
             @PathVariable Long memberId
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(memberService.findOne(memberId));
+    }
+
+    // 업데이트 : 딱 하나 지정 : PathVariable이 필요함
+    @PutMapping("/members/{memberId}")
+    public ResponseEntity<MemberUpdateResponse> update(
+            @PathVariable Long memberId,
+            @RequestBody MemberUpdateRequest request
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.update(memberId, request));
     }
 }

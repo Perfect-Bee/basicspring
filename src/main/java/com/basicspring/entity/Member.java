@@ -18,4 +18,8 @@ public class Member extends BaseEntity{
         this.name = name;
     }
 
+    public void update(String name){
+        this.name = name;
+    }
+
 }
