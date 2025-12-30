@@ -2,13 +2,17 @@ package com.basicspring.controller;
 
 import com.basicspring.dto.MemberCreateResponse;
 import com.basicspring.dto.MemberCreateRequest;
+import com.basicspring.dto.MemberGetResponse;
 import com.basicspring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,4 +34,10 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).body(memberService.save(request));
     }
 
+    // 조회
+    // 전체조회
+    @GetMapping("/members")
+    public ResponseEntity<List<MemberGetResponse>> getAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.findAll());
+    }
 }
