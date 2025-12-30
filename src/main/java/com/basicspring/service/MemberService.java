@@ -49,4 +49,20 @@ public class MemberService {
         }
         return dtos;
     }
+
+    // 맴버 Respository에서 memberId를 찾을거임(findAll에서는 전부 찾는 거였고)
+    // findAll은 빈 리스트가 존재했음. 근데, 이건 없음(null : 위험)
+    @Transactional(readOnly = true)
+    public MemberGetResponse findOne(Long memberId) {
+        // null 대신 던져 ->  Optional 맴버 없으면 던져(orElseThrow)
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new IllegalStateException("없는 맴버입니다.")
+        );
+        return new MemberGetResponse(
+                member.getId(),
+                member.getName(),
+                member.getCreatedAt(),
+                member.getModifiedAt()
+        );
+    }
 }
